@@ -27,7 +27,7 @@ function getItem(state,itemIndex) {
   return state.items[itemIndex];
 }
 
-function deleteItem(state, itenIndex) {
+function deleteItem(state, itemIndex) {
   state.items.splice(itemIndex, 1);
 }
 
@@ -58,11 +58,11 @@ function makeList(state, listElemnt, itemInfo) {
 
 //Event Watchers
 
-function handleAdd (formElement, newItemId, itemInfo, listElemnt, state) {
+function handleAdd (formElement, itemName, itemInfo, listElemnt, state) {
   formElement.submit(function(event) {
   event.preventDefault();
   console.log("Hello");
-  var newItem = formElement.find(newItemId).val();
+  var newItem = formElement.find(itemName).val();
   //console.log(newItem);
   addItem(state,newItem);
   makeList(state, listElemnt, itemInfo);
@@ -73,8 +73,8 @@ function handleAdd (formElement, newItemId, itemInfo, listElemnt, state) {
 function handleDelete (formElement, removeId, itemInfo, listElemnt, state){
   listElemnt.on("click", removeId, function(event){
     var itemIndex = parseInt($(this).closest("li").attr(itemInfo));
-    deleteItem(list, itemIndex);
-    makeList(list, listElemnt, itemInfo);
+    deleteItem(state, itemIndex);
+    makeList(state, listElemnt, itemInfo);
   })
 }
 
@@ -82,7 +82,7 @@ function handleToggle (listElemnt, toggleID, itemInfo, state) {
 
   listElemnt.on("click", toggleID, function(event) {
     var itemName = $(event.currentTarget.closest("li")).attr(itemInfo);
-    var oldItem = getItem(list, itemName);
+    var oldItem = getItem(state, itemName);
 
     updateItem(state, itemName, {
       displayName: oldItem.displayName,
@@ -95,12 +95,12 @@ function handleToggle (listElemnt, toggleID, itemInfo, state) {
 $(function() {
   var formElement = $('#js-shopping-list-form');
   var listElemnt = $('.js-shopping-list');
-  var newItemId = '#js-new-item';
+  var itemName = '#js-new-item';
   var removeId = ".js-shopping-item-delete";
   var itemInfo = 'data-list-item-id';
   var toggleID = '.js-shopping-item-toggle'
 
-  handleAdd(formElement, newItemId, itemInfo, listElemnt, state);
+  handleAdd(formElement, itemName, itemInfo, listElemnt, state);
   handleDelete(formElement, removeId, itemInfo, listElemnt, state);
   handleToggle(listElemnt,toggleID,itemInfo,state);
 
