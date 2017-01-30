@@ -93,12 +93,12 @@ function handleToggle (listElemnt, toggleID, itemInfo, state) {
 }
 
 $(function() {
-  var formElement = $('.shopping-list-add');
-  var listElemnt = $(".js-shopping-list");
-  var newItemId = "#add-input";
+  var formElement = $('#js-shopping-list-form');
+  var listElemnt = $('.js-shopping-list');
+  var newItemId = '#js-new-item';
   var removeId = ".js-shopping-item-delete";
-  var itemInfo = "data-list-item-id";
-  var toggleID = ".js-shopping-item-toggle"
+  var itemInfo = 'data-list-item-id';
+  var toggleID = '.js-shopping-item-toggle'
 
   handleAdd(formElement, newItemId, itemInfo, listElemnt, state);
   handleDelete(formElement, removeId, itemInfo, listElemnt, state);
